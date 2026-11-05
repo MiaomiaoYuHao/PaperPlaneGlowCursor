@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+<defs>
+ <filter id="g1" x="-100%" y="-100%" width="300%" height="300%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="5.8"/></filter>
+ <filter id="g2" x="-90%" y="-90%" width="280%" height="280%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="3.3"/></filter>
+ <filter id="g3" x="-70%" y="-70%" width="240%" height="240%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="1.7"/></filter>
+</defs>
+<g transform="translate(0.5 0.25) translate(25.3 22.4) scale(1.0404) translate(-25.3 -22.4)">
+ <path d="M 11.5 8.2 C 10.8 9.8 11.0 11.8 11.9 13.8 L 18.7 33.8 C 19.1 35.4 20.0 36.4 21.3 36.5 C 22.7 36.6 23.8 35.7 24.2 34.2 L 25.2 27.4 C 25.4 26.2 26.1 25.5 27.4 25.2 L 37.0 22.5 C 38.7 22.0 39.6 20.8 39.2 19.4 C 38.8 18.0 37.5 17.2 35.7 16.6 L 19.5 10.8 C 17.9 10.1 15.7 8.9 13.8 8.6 C 12.9 8.5 12.1 8.2 11.5 8.2 Z" fill="none" stroke="#146fff" stroke-width="16" stroke-linejoin="round" stroke-linecap="round" opacity="0.32" filter="url(#g1)"/>
+ <path d="M 11.5 8.2 C 10.8 9.8 11.0 11.8 11.9 13.8 L 18.7 33.8 C 19.1 35.4 20.0 36.4 21.3 36.5 C 22.7 36.6 23.8 35.7 24.2 34.2 L 25.2 27.4 C 25.4 26.2 26.1 25.5 27.4 25.2 L 37.0 22.5 C 38.7 22.0 39.6 20.8 39.2 19.4 C 38.8 18.0 37.5 17.2 35.7 16.6 L 19.5 10.8 C 17.9 10.1 15.7 8.9 13.8 8.6 C 12.9 8.5 12.1 8.2 11.5 8.2 Z" fill="none" stroke="#3799ff" stroke-width="10.5" stroke-linejoin="round" stroke-linecap="round" opacity="0.52" filter="url(#g2)"/>
+ <path d="M 11.5 8.2 C 10.8 9.8 11.0 11.8 11.9 13.8 L 18.7 33.8 C 19.1 35.4 20.0 36.4 21.3 36.5 C 22.7 36.6 23.8 35.7 24.2 34.2 L 25.2 27.4 C 25.4 26.2 26.1 25.5 27.4 25.2 L 37.0 22.5 C 38.7 22.0 39.6 20.8 39.2 19.4 C 38.8 18.0 37.5 17.2 35.7 16.6 L 19.5 10.8 C 17.9 10.1 15.7 8.9 13.8 8.6 C 12.9 8.5 12.1 8.2 11.5 8.2 Z" fill="none" stroke="#88d2ff" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" opacity="0.42" filter="url(#g3)"/>
+ <path d="M 11.5 8.2 C 10.8 9.8 11.0 11.8 11.9 13.8 L 18.7 33.8 C 19.1 35.4 20.0 36.4 21.3 36.5 C 22.7 36.6 23.8 35.7 24.2 34.2 L 25.2 27.4 C 25.4 26.2 26.1 25.5 27.4 25.2 L 37.0 22.5 C 38.7 22.0 39.6 20.8 39.2 19.4 C 38.8 18.0 37.5 17.2 35.7 16.6 L 19.5 10.8 C 17.9 10.1 15.7 8.9 13.8 8.6 C 12.9 8.5 12.1 8.2 11.5 8.2 Z" fill="#ffffff" stroke="#ffffff" stroke-width="4.8" stroke-linejoin="round" stroke-linecap="round"/>
+ <path d="M 11.5 8.2 C 10.8 9.8 11.0 11.8 11.9 13.8 L 18.7 33.8 C 19.1 35.4 20.0 36.4 21.3 36.5 C 22.7 36.6 23.8 35.7 24.2 34.2 L 25.2 27.4 C 25.4 26.2 26.1 25.5 27.4 25.2 L 37.0 22.5 C 38.7 22.0 39.6 20.8 39.2 19.4 C 38.8 18.0 37.5 17.2 35.7 16.6 L 19.5 10.8 C 17.9 10.1 15.7 8.9 13.8 8.6 C 12.9 8.5 12.1 8.2 11.5 8.2 Z" fill="#020202"/>
+</g>
+</svg>

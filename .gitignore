@@ -1,0 +1,29 @@
+# Installer-generated local state
+current-config.json
+previous-cursor-config.json
+PaperPlaneGlowClick.log
+
+# Local freeze snapshots and release builds
+FROZEN.txt
+/Restore-FrozenVersion.ps1
+versions/
+release/
+dist/
+
+# Duplicate/generated files kept outside the public repository
+/PaperPlaneGlowClick.cs
+/PaperPlaneGlow.svg
+/PaperPlaneGlow-src.png
+/preview.png
+/click-preview.gif
+/click-preview.png
+/verified-click-preview.png
+/pixel-comparison.png
+/*.new.exe
+
+.vscode/
+.idea/
+
+# Windows metadata
+Thumbs.db
+desktop.ini
