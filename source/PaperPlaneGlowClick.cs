@@ -66,7 +66,7 @@ namespace PaperPlaneGlowClick
         private static extern bool DeleteObject(IntPtr hObject);
 
         private static IntPtr normalCursor = IntPtr.Zero;
-        private static IntPtr animatedCursor = IntPtr.Zero;
+        private static string animatedCursorPath;
         private static bool pulseActive = false;
         private static bool enabled = true;
         private static bool wasDown = false;
@@ -93,6 +93,7 @@ namespace PaperPlaneGlowClick
             string appDir = AppDomain.CurrentDomain.BaseDirectory;
             string iconPath = Path.Combine(appDir, "PaperPlaneGlow.ico");
             logPath = Path.Combine(appDir, "PaperPlaneGlowClick.log");
+            animatedCursorPath = Path.Combine(appDir, "PaperPlaneGlowClick.ani");
             normalCursor = LoadImage(IntPtr.Zero, Path.Combine(appDir, "PaperPlaneGlow.cur"), IMAGE_CURSOR, CursorSize, CursorSize, LR_LOADFROMFILE);
             if (normalCursor == IntPtr.Zero)
             {
@@ -101,13 +102,14 @@ namespace PaperPlaneGlowClick
                 return;
             }
 
-            animatedCursor = LoadImage(IntPtr.Zero, Path.Combine(appDir, "PaperPlaneGlowClick.ani"), IMAGE_CURSOR, CursorSize, CursorSize, LR_LOADFROMFILE);
-            if (animatedCursor == IntPtr.Zero)
+            IntPtr animatedProbe = LoadImage(IntPtr.Zero, animatedCursorPath, IMAGE_CURSOR, CursorSize, CursorSize, LR_LOADFROMFILE);
+            if (animatedProbe == IntPtr.Zero)
             {
                 Log("Animated cursor load failed. error=" + Marshal.GetLastWin32Error());
                 MessageBox.Show("Could not load PaperPlaneGlowClick.ani.", "Paper Plane Glow Cursor", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            DestroyCursor(animatedProbe);
 
             ApplyNormal();
 
@@ -171,11 +173,13 @@ namespace PaperPlaneGlowClick
 
         private static void StartPulse()
         {
-            // SetSystemCursor owns and destroys the handle, so always pass a private copy.
-            IntPtr animated = CopyIcon(animatedCursor);
+            // Load a fresh cursor for each pulse so the native animation starts at frame zero.
+            // CopyIcon flattens .ani files to a static frame, so the file-backed cursor handle
+            // must be passed directly to SetSystemCursor, which takes ownership of it.
+            IntPtr animated = LoadImage(IntPtr.Zero, animatedCursorPath, IMAGE_CURSOR, CursorSize, CursorSize, LR_LOADFROMFILE);
             if (animated == IntPtr.Zero)
             {
-                Log("Animated cursor copy failed. error=" + Marshal.GetLastWin32Error());
+                Log("Animated cursor reload failed. error=" + Marshal.GetLastWin32Error());
                 return;
             }
 

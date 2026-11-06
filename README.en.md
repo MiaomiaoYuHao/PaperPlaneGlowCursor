@@ -41,7 +41,7 @@ A lightweight glowing paper-plane cursor for Windows with a smooth click pulse.
 ### Recommended: download a release
 
 1. Open the [latest release](https://github.com/MiaomiaoYuHao/PaperPlaneGlowCursor/releases/latest).
-2. Download `PaperPlaneGlowCursor-v1.1.0-win.zip`.
+2. Download `PaperPlaneGlowCursor-v1.1.1-win.zip`.
 3. Extract the entire ZIP to a permanent folder, for example:
    `C:\Users\<you>\Apps\PaperPlaneGlowCursor`
 4. Double-click `Install.cmd`.

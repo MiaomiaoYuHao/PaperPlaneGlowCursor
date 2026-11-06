@@ -2,6 +2,10 @@
 
 All notable changes to this project are documented here.
 
+## v1.1.1 - 2026-11-06
+
+- Fixed a regression where `CopyIcon` flattened the `.ani` cursor to a static frame.
+- Each pulse now loads a fresh file-backed animated cursor handle directly, restoring the verified native animation behavior.
 ## v1.1.0 - 2026-11-06
 
 - Replaced the layered overlay renderer with a native Windows animated cursor (`.ani`).

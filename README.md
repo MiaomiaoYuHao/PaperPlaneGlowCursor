@@ -41,7 +41,7 @@
 ### 推荐方式：下载 Release
 
 1. 打开 [最新 Release](https://github.com/MiaomiaoYuHao/PaperPlaneGlowCursor/releases/latest)。
-2. 下载 `PaperPlaneGlowCursor-v1.1.0-win.zip`。
+2. 下载 `PaperPlaneGlowCursor-v1.1.1-win.zip`。
 3. 将 ZIP **完整解压**到一个长期保留的文件夹，例如：
    `C:\Users\<你的用户名>\Apps\PaperPlaneGlowCursor`
 4. 双击 `Install.cmd`。
