@@ -165,6 +165,16 @@ The helper is a small WinForms tray application. The normal state uses a native 
 - Changing the Windows cursor scheme later may overwrite the configuration.
 - The executable is unsigned, so SmartScreen may warn.
 
+## Support the Author
+
+If this project has been useful to you, you are welcome to support the author. Donations are completely optional and do not affect access, updates, or support.
+
+<p align="center">
+  <a href="SUPPORT.md"><img src="docs/support/wechat-pay.jpg" alt="WeChat Pay QR code" width="300"></a>
+</p>
+
+See [SUPPORT.md](SUPPORT.md) for details.
+
 ## License
 
 [MIT](LICENSE) © 2026 MiaomiaoYuHao

@@ -212,6 +212,16 @@ python tools\generate_cursor_assets.py
 
 并在 Windows 10/11 上实际测试安装、点击动画和卸载流程。
 
+## 作者答谢
+
+如果这个项目对你有帮助，欢迎扫码请作者喝杯咖啡。赞赏完全自愿，不影响软件功能、更新或支持。
+
+<p align="center">
+  <a href="SUPPORT.md"><img src="docs/support/wechat-pay.jpg" alt="微信赞赏码" width="300"></a>
+</p>
+
+更多说明见 [SUPPORT.md](SUPPORT.md)。
+
 ## License
 
 [MIT](LICENSE) © 2026 MiaomiaoYuHao
