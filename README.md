@@ -19,16 +19,18 @@
 
 ![点击动画](docs/click-preview.gif)
 
-- 普通光标：40 px
+- 普通光标：视觉 40 px，原生画布 48 px
 - 点击动画：`40 → 42 → 44 → 46 → 48 → 48 → 46 → 44 → 42 → 40 px`
-- 动画时长约 200 ms，跟随鼠标位置
+- 使用 Windows 原生动画光标，约 200 ms 后自动恢复
+- 任务栏、系统托盘、开始菜单和系统弹层均可正常播放
 - 支持高 DPI，不需要管理员权限
 
 ## 特性
 
-- 透明置顶覆盖层，不阻塞鼠标点击
-- 点击时平滑放大并回弹，动画结束后自动恢复
-- 使用 DWM 合成同步，避免点击开头的闪烁
+- Windows 原生 `.ani` 动画光标，不依赖窗口覆盖层
+- 任务栏、系统托盘、开始菜单和系统弹层均可显示动画
+- 动画期间系统光标始终可见，不会消失或闪空
+- 零跟随延迟，鼠标移动时动画仍由系统原生绘制
 - 托盘菜单可随时启用/禁用动画或退出
 - 安装时自动备份原来的光标配置
 - 一键安装与卸载，不修改系统文件
@@ -39,7 +41,7 @@
 ### 推荐方式：下载 Release
 
 1. 打开 [最新 Release](https://github.com/MiaomiaoYuHao/PaperPlaneGlowCursor/releases/latest)。
-2. 下载 `PaperPlaneGlowCursor-v1.0.0-win.zip`。
+2. 下载 `PaperPlaneGlowCursor-v1.1.0-win.zip`。
 3. 将 ZIP **完整解压**到一个长期保留的文件夹，例如：
    `C:\Users\<你的用户名>\Apps\PaperPlaneGlowCursor`
 4. 双击 `Install.cmd`。
@@ -122,16 +124,23 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\build.ps1
 dist\PaperPlaneGlowClick.exe
 ```
 
+如需重新生成 `.cur` 和 `.ani` 资源：
+
+```powershell
+python -m pip install -r tools\requirements.txt
+python tools\generate_cursor_assets.py
+```
+
 ## 工作原理
 
 助手是一个轻量的 WinForms 托盘程序：
 
-1. 常驻一个透明的置顶分层窗口，并预先完成桌面合成。
-2. 检测到左键按下且当前是普通箭头光标时开始动画。
-3. 将系统光标临时替换为透明光标，同时由覆盖窗口绘制 `40–48 px` 的动画帧。
-4. 每 20 ms 更新一帧，并让覆盖窗口跟随鼠标位置。
-5. 动画结束后恢复系统光标，再将覆盖窗口移出屏幕。
-6. 在切换系统光标和覆盖窗口时调用 `DwmFlush`，减少合成时序造成的闪烁。
+1. 普通状态使用 48 px 画布、视觉内容 40 px 的原生 `.cur` 光标。
+2. 检测到左键按下且当前是普通箭头光标时，加载 `PaperPlaneGlowClick.ani`。
+3. 通过 `SetSystemCursor` 将普通箭头切换为原生动画光标。
+4. Windows 直接绘制 10 个放大回弹帧，最后保持 40 px 等待切换。
+5. 约 220 ms 后恢复普通纸飞机光标。
+6. 动画由系统光标层完成，因此天然高于任务栏、开始菜单和系统托盘，不会出现覆盖层被遮住的问题。
 
 ## 项目结构
 
@@ -144,13 +153,16 @@ dist\PaperPlaneGlowClick.exe
 ├─ Uninstall-ClickEffect.ps1    # 仅停用点击动画
 ├─ build.ps1                    # 从源码构建 exe
 ├─ PaperPlaneGlowClick.exe      # 已编译的 Windows 助手
+├─ PaperPlaneGlowClick.ani      # 原生点击动画光标
 ├─ PaperPlaneGlow.cur           # 普通光标
-├─ PaperPlaneGlow-Blank.cur     # 动画期间使用的透明光标
-├─ PaperPlaneGlow-Frame*.png    # 动画帧
+├─ PaperPlaneGlow-Frame*.png    # 动画帧源文件
 ├─ PaperPlaneGlow.ico           # 托盘图标
 ├─ source/
 │  ├─ PaperPlaneGlowClick.cs    # C# 源码
 │  └─ PaperPlaneGlow.svg        # 矢量源文件
+├─ tools/
+│  ├─ generate_cursor_assets.py # 生成 .cur / .ani
+│  └─ requirements.txt
 ├─ docs/                        # README 预览图
 ├─ CHANGELOG.md
 └─ LICENSE
@@ -167,6 +179,7 @@ dist\PaperPlaneGlowClick.exe
 
 - 仅支持 Windows 和普通箭头光标。
 - 只响应鼠标左键。
+- 动画帧率由 Windows 光标系统控制，约为每帧 `1/60` 秒，不是任意毫秒精度。
 - 安装路径与当前文件夹绑定，移动文件夹后需要重新安装。
 - 如果之后切换了 Windows 光标主题，需要重新运行安装脚本。
 - 未使用商业代码签名证书，因此可能出现 SmartScreen 提示。
@@ -187,7 +200,7 @@ dist\PaperPlaneGlowClick.exe
 
 ### 可以自定义颜色、大小或动画时长吗？
 
-可以。配色和路径位于 `source/PaperPlaneGlow.svg`，动画帧位于根目录的 `PaperPlaneGlow-Frame*.png`，帧序列位于 `source/PaperPlaneGlowClick.cs` 的 `sequence` 数组。
+可以。配色和路径位于 `source/PaperPlaneGlow.svg`，动画帧位于根目录的 `PaperPlaneGlow-Frame*.png`。修改后运行 `python tools\generate_cursor_assets.py` 重新生成 `PaperPlaneGlow.cur` 和 `PaperPlaneGlowClick.ani`。
 
 ## 贡献
 

@@ -9,6 +9,12 @@ $csc = Join-Path $env:WINDIR 'Microsoft.NET\Framework64\v4.0.30319\csc.exe'
 if (-not (Test-Path -LiteralPath $csc)) {
     throw '.NET Framework C# compiler not found. Windows 10/11 is required.'
 }
+$requiredAssets = @('PaperPlaneGlow.cur', 'PaperPlaneGlowClick.ani', 'PaperPlaneGlow.ico')
+foreach ($asset in $requiredAssets) {
+    if (-not (Test-Path -LiteralPath (Join-Path $here $asset))) {
+        throw "Required cursor asset not found: $asset"
+    }
+}
 if (-not (Test-Path -LiteralPath $source)) {
     throw 'Source file not found: source\PaperPlaneGlowClick.cs'
 }

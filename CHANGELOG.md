@@ -2,6 +2,15 @@
 
 All notable changes to this project are documented here.
 
+## v1.1.0 - 2026-11-06
+
+- Replaced the layered overlay renderer with a native Windows animated cursor (`.ani`).
+- Click animation now works on the taskbar, system tray, Start menu, and system flyouts.
+- The system cursor remains visible for the entire animation instead of being replaced with a transparent cursor.
+- Removed cursor position tracking and the overlay z-order dependency.
+- Switched to a 48 px native cursor canvas with 40 px visual content.
+- Added a reproducible cursor asset generator.
+
 ## v1.0.0 - 2026-11-05
 
 - Initial public release.

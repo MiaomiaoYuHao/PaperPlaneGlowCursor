@@ -11,6 +11,7 @@
 
 *.exe binary
 *.cur binary
+*.ani binary
 *.ico binary
 *.png binary
 *.gif binary

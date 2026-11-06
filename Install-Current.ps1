@@ -8,14 +8,9 @@ $backupPath = Join-Path $here 'previous-cursor-config.json'
 
 $requiredFiles = @(
     'PaperPlaneGlow.cur',
-    'PaperPlaneGlow-Blank.cur',
+    'PaperPlaneGlowClick.ani',
     'PaperPlaneGlow.ico',
-    'PaperPlaneGlowClick.exe',
-    'PaperPlaneGlow-Frame40.png',
-    'PaperPlaneGlow-Frame42.png',
-    'PaperPlaneGlow-Frame44.png',
-    'PaperPlaneGlow-Frame46.png',
-    'PaperPlaneGlow-Frame48.png'
+    'PaperPlaneGlowClick.exe'
 )
 
 foreach ($name in $requiredFiles) {
@@ -39,7 +34,7 @@ Get-Process PaperPlaneGlowClick -ErrorAction SilentlyContinue | Stop-Process -Fo
 Start-Sleep -Milliseconds 200
 
 Set-ItemProperty -Path $cursors -Name Arrow -Value $cursorPath
-Set-ItemProperty -Path $cursors -Name CursorBaseSize -Value 40 -Type DWord
+Set-ItemProperty -Path $cursors -Name CursorBaseSize -Value 48 -Type DWord
 Set-ItemProperty -Path $cursors -Name '(default)' -Value 'Paper Plane Blue Glow'
 Set-ItemProperty -Path $runKey -Name 'PaperPlaneGlowClick' -Value ('"' + $exePath + '"')
 
@@ -64,7 +59,7 @@ if ($helper.HasExited) {
 $config = [ordered]@{
     capturedAt = (Get-Date -Format 'yyyy-MM-dd HH:mm:ss zzz')
     arrowPath = $cursorPath
-    cursorBaseSize = 40
+    cursorBaseSize = 48
     schemeName = 'Paper Plane Blue Glow'
     startupRun = ('"' + $exePath + '"')
     helperPath = $exePath

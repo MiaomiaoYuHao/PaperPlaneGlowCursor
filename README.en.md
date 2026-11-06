@@ -19,16 +19,18 @@ A lightweight glowing paper-plane cursor for Windows with a smooth click pulse.
 
 ![Click animation](docs/click-preview.gif)
 
-- Normal cursor: 40 px
+- Normal cursor: 40 px visual content on a native 48 px canvas
 - Click pulse: `40 -> 42 -> 44 -> 46 -> 48 -> 48 -> 46 -> 44 -> 42 -> 40 px`
-- Approximately 200 ms per pulse
+- Native Windows animated cursor, restored after approximately 200 ms
+- Works on the taskbar, system tray, Start menu, and system flyouts
 - High-DPI aware and no administrator rights required
 
 ## Features
 
-- Click-through, topmost layered overlay
-- Smooth grow-and-return animation on left click
-- DWM presentation synchronization prevents the click-start flash
+- Native Windows `.ani` animated cursor, with no window overlay
+- Works on the taskbar, system tray, Start menu, and system flyouts
+- The system cursor remains visible throughout the animation
+- Zero tracking lag because Windows renders the cursor natively
 - Tray menu to enable/disable the effect or exit
 - Automatically backs up the previous cursor configuration
 - One-click install and uninstall
@@ -39,7 +41,7 @@ A lightweight glowing paper-plane cursor for Windows with a smooth click pulse.
 ### Recommended: download a release
 
 1. Open the [latest release](https://github.com/MiaomiaoYuHao/PaperPlaneGlowCursor/releases/latest).
-2. Download `PaperPlaneGlowCursor-v1.0.0-win.zip`.
+2. Download `PaperPlaneGlowCursor-v1.1.0-win.zip`.
 3. Extract the entire ZIP to a permanent folder, for example:
    `C:\Users\<you>\Apps\PaperPlaneGlowCursor`
 4. Double-click `Install.cmd`.
@@ -110,9 +112,16 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\build.ps1
 
 The build uses the C# compiler included with the Windows .NET Framework. Visual Studio and network package restore are not required. The output is written to `dist\PaperPlaneGlowClick.exe`.
 
+To regenerate the `.cur` and `.ani` assets:
+
+```powershell
+python -m pip install -r tools\requirements.txt
+python tools\generate_cursor_assets.py
+```
+
 ## How it works
 
-The helper is a small WinForms tray application. It keeps a transparent topmost layered window prewarmed, swaps the system cursor to a transparent cursor during a pulse, and renders the `40–48 px` animation frames at 20 ms intervals. `DwmFlush` synchronizes cursor replacement and overlay presentation to avoid a one-frame flash.
+The helper is a small WinForms tray application. The normal state uses a native `.cur` cursor with a 48 px canvas and 40 px visual content. On left click, it loads `PaperPlaneGlowClick.ani` and calls `SetSystemCursor` to switch to the native animated cursor. Windows renders the grow-and-return frames directly, then the helper restores the normal cursor after about 220 ms. Because the animation lives in the system cursor layer, it stays above the taskbar, Start menu, and system flyouts.
 
 ## Project layout
 
@@ -125,13 +134,16 @@ The helper is a small WinForms tray application. It keeps a transparent topmost 
 ├─ Uninstall-ClickEffect.ps1
 ├─ build.ps1
 ├─ PaperPlaneGlowClick.exe
+├─ PaperPlaneGlowClick.ani
 ├─ PaperPlaneGlow.cur
-├─ PaperPlaneGlow-Blank.cur
 ├─ PaperPlaneGlow-Frame*.png
 ├─ PaperPlaneGlow.ico
 ├─ source/
 │  ├─ PaperPlaneGlowClick.cs
 │  └─ PaperPlaneGlow.svg
+├─ tools/
+│  ├─ generate_cursor_assets.py
+│  └─ requirements.txt
 ├─ docs/
 ├─ CHANGELOG.md
 └─ LICENSE
@@ -147,6 +159,7 @@ The helper is a small WinForms tray application. It keeps a transparent topmost 
 ## Known limitations
 
 - Windows only, and only for the standard arrow cursor.
+- Native cursor animation timing follows the Windows cursor clock (roughly 1/60 second per frame).
 - Left mouse button only.
 - The installed configuration points to the extracted folder; moving it requires reinstalling.
 - Changing the Windows cursor scheme later may overwrite the configuration.

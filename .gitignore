@@ -21,6 +21,9 @@ dist/
 /pixel-comparison.png
 /*.new.exe
 
+__pycache__/
+*.pyc
+
 .vscode/
 .idea/
 
