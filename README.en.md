@@ -33,6 +33,7 @@ A lightweight glowing paper-plane cursor for Windows with a smooth click pulse.
 - Zero tracking lag because Windows renders the cursor natively
 - Tray menu to enable/disable the effect or exit
 - Automatically backs up the previous cursor configuration
+- Registers both a current-user Run entry and a Startup folder shortcut for reliable login auto-start
 - One-click install and uninstall
 - No network access, telemetry, services, or system-file modifications
 
@@ -41,7 +42,7 @@ A lightweight glowing paper-plane cursor for Windows with a smooth click pulse.
 ### Recommended: download a release
 
 1. Open the [latest release](https://github.com/MiaomiaoYuHao/PaperPlaneGlowCursor/releases/latest).
-2. Download `PaperPlaneGlowCursor-v1.1.1-win.zip`.
+2. Download `PaperPlaneGlowCursor-v1.1.2-win.zip`.
 3. Extract the entire ZIP to a permanent folder, for example:
    `C:\Users\<you>\Apps\PaperPlaneGlowCursor`
 4. Double-click `Install.cmd`.
@@ -152,7 +153,7 @@ The helper is a small WinForms tray application. The normal state uses a native 
 ## Safety and privacy
 
 - No network requests, telemetry, or data collection.
-- No service is installed; the helper starts through the current user's `Run` key.
+- No system service is installed; the helper starts through the current user's `Run` key and a Startup folder shortcut.
 - Other users and system files are not modified.
 - All installer, uninstaller, and build logic is available as readable PowerShell/C# source.
 

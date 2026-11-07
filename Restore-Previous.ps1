@@ -16,6 +16,8 @@ if (Test-Path -LiteralPath $backupPath) {
 
 Get-Process PaperPlaneGlowClick -ErrorAction SilentlyContinue | Stop-Process -Force
 Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' -Name 'PaperPlaneGlowClick' -ErrorAction SilentlyContinue
+$shortcutPath = Join-Path ([Environment]::GetFolderPath('Startup')) 'PaperPlaneGlowCursor.lnk'
+Remove-Item -LiteralPath $shortcutPath -Force -ErrorAction SilentlyContinue
 Set-ItemProperty -Path $cursors -Name Arrow -Value $arrow
 Set-ItemProperty -Path $cursors -Name CursorBaseSize -Value $size -Type DWord
 Set-ItemProperty -Path $cursors -Name '(default)' -Value $default
@@ -31,4 +33,4 @@ if (-not [CursorRestoreLocal]::SystemParametersInfo(0x0057, 0, [IntPtr]::Zero, 0
     throw "SystemParametersInfo failed: $([Runtime.InteropServices.Marshal]::GetLastWin32Error())"
 }
 
-Write-Host 'Previous cursor settings restored and click animation removed.'
+Write-Host 'Previous cursor settings restored and startup entries removed.'

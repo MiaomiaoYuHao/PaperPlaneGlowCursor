@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented here.
 
+## v1.1.2 - 2026-11-07
+
+- Added a Startup folder shortcut alongside the per-user Run entry for more reliable login auto-start.
+- The installer now verifies that the Run entry was written successfully.
+- Uninstall and restore scripts now remove both startup registrations.
+- Added an auto-start troubleshooting section to the README.
+
 ## v1.1.1 - 2026-11-06
 
 - Fixed a regression where `CopyIcon` flattened the `.ani` cursor to a static frame.

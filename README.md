@@ -33,6 +33,7 @@
 - 零跟随延迟，鼠标移动时动画仍由系统原生绘制
 - 托盘菜单可随时启用/禁用动画或退出
 - 安装时自动备份原来的光标配置
+- 安装后同时注册当前用户 Run 启动项和启动文件夹快捷方式，提高开机自启可靠性
 - 一键安装与卸载，不修改系统文件
 - 完全开源，无网络请求、无遥测、无后台服务
 
@@ -41,7 +42,7 @@
 ### 推荐方式：下载 Release
 
 1. 打开 [最新 Release](https://github.com/MiaomiaoYuHao/PaperPlaneGlowCursor/releases/latest)。
-2. 下载 `PaperPlaneGlowCursor-v1.1.1-win.zip`。
+2. 下载 `PaperPlaneGlowCursor-v1.1.2-win.zip`。
 3. 将 ZIP **完整解压**到一个长期保留的文件夹，例如：
    `C:\Users\<你的用户名>\Apps\PaperPlaneGlowCursor`
 4. 双击 `Install.cmd`。
@@ -171,7 +172,7 @@ python tools\generate_cursor_assets.py
 ## 安全与隐私
 
 - 不联网、不上传数据、不包含遥测。
-- 不开机驻留服务，只通过当前用户的 `Run` 注册表项启动托盘助手。
+- 不安装系统服务；通过当前用户的 `Run` 注册表项和启动文件夹快捷方式启动托盘助手。
 - 不修改其他用户的设置，不需要管理员权限。
 - 所有安装、卸载和构建逻辑均为可审查的 PowerShell/C# 源码。
 
@@ -194,6 +195,12 @@ python tools\generate_cursor_assets.py
 4. 重新运行 `Install.cmd`。
 5. 查看同目录下的 `PaperPlaneGlowClick.log`。
 
+### 开机没有自动启动？
+
+1. 重新运行一次 `Install.cmd`。
+2. 打开 Windows“设置 → 应用 → 启动”，确认纸飞机相关启动项没有被关闭。
+3. 登录后查看同目录下的 `PaperPlaneGlowClick.log` 是否有新的 `Started` 记录。
+4. 如果移动过安装文件夹，必须在新位置重新运行 `Install.cmd`。
 ### 光标消失了？
 
 右键托盘图标并选择 `Exit`，然后重新运行 `Install.cmd`。如果仍然异常，运行 `Uninstall.cmd` 恢复原光标配置。
